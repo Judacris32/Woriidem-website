@@ -1,0 +1,193 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ------------------------------------------------------------------
+   Theme tokens. Light mode is the default; dark mode lives on .dark
+   Values are RGB channels so Tailwind can apply opacity (bg-ink/60).
+------------------------------------------------------------------- */
+@layer base {
+  :root {
+    --bg: 255 255 255;          /* Clean White */
+    --surface: 245 243 247;     /* Soft Lavender */
+    --surface-2: 236 232 242;
+    --ink: 11 11 15;            /* Deep Black */
+    --muted: 84 80 96;
+    --line: 228 224 235;
+    --accent: 109 40 217;       /* Royal Purple: buttons */
+    --hl: 192 38 211;           /* Magenta Violet: small highlight text */
+    color-scheme: light;
+  }
+
+  .dark {
+    --bg: 11 11 15;             /* Deep Black */
+    --surface: 31 31 46;        /* Charcoal */
+    --surface-2: 41 41 60;
+    --ink: 245 243 247;
+    --muted: 170 166 186;
+    --line: 48 48 68;
+    --accent: 124 58 237;       /* Electric Purple */
+    --hl: 167 139 250;          /* Soft Violet: readable on black */
+    color-scheme: dark;
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    @apply bg-bg font-sans text-ink antialiased;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+
+  h1, h2, h3, h4 {
+    @apply font-display;
+    text-wrap: balance;
+  }
+
+  ::selection {
+    background: rgb(192 38 211 / 0.85);
+    color: #fff;
+  }
+
+  :focus-visible {
+    outline: 2px solid #c026d3;
+    outline-offset: 3px;
+    border-radius: 6px;
+  }
+}
+
+@layer components {
+  /* Fluid page container: side padding grows with the screen, content caps at ~1240px */
+  .container {
+    width: 100%;
+    margin-inline: auto;
+    padding-inline: clamp(1.25rem, 5vw, 4rem);
+    max-width: calc(1240px + 2 * clamp(1.25rem, 5vw, 4rem));
+  }
+
+  /* Justified body copy that stays even on narrow screens */
+  .text-justified {
+    text-align: justify;
+    text-justify: inter-word;
+    hyphens: auto;
+    -webkit-hyphens: auto;
+    hyphenate-limit-chars: 7 3 3;
+    text-wrap: pretty;
+  }
+
+  .eyebrow {
+    @apply inline-flex items-center gap-3 font-sans text-[0.72rem] font-semibold uppercase tracking-[0.28em] text-hl;
+  }
+  .eyebrow::before {
+    content: "";
+    @apply h-[2px] w-8 rounded-full bg-magenta;
+  }
+
+  /* ---------------- Buttons ---------------- */
+  .btn {
+    @apply relative isolate inline-flex min-h-[48px] items-center justify-center gap-2.5 overflow-hidden rounded-full px-7 font-display text-[0.95rem] font-semibold tracking-[0.01em];
+    transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+      color 0.35s ease, border-color 0.35s ease, background-color 0.35s ease;
+  }
+  .btn::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    transform: translateX(-101%);
+    transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .btn:hover::before,
+  .btn:focus-visible::before {
+    transform: translateX(0);
+  }
+  .btn:hover {
+    transform: translateY(-2px);
+  }
+  .btn:active {
+    transform: translateY(0) scale(0.97);
+  }
+  .btn .btn-icon {
+    transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .btn:hover .btn-icon {
+    transform: translateX(4px);
+  }
+  .btn:hover .btn-icon-diag {
+    transform: translate(3px, -3px);
+  }
+
+  /* Royal/Electric purple, sweeps to magenta with a soft glow */
+  .btn-primary {
+    @apply bg-accent text-white;
+  }
+  .btn-primary::before {
+    background: #c026d3;
+  }
+  .btn-primary:hover {
+    @apply shadow-glow;
+  }
+
+  /* Outline that fills with ink and flips the text colour */
+  .btn-outline {
+    @apply border-[1.5px] border-ink/85 text-ink;
+  }
+  .btn-outline::before {
+    @apply bg-ink;
+  }
+  .btn-outline:hover {
+    @apply text-bg;
+  }
+
+  /* For use on photos and dark bands: white outline, fills white */
+  .btn-light {
+    @apply border-[1.5px] border-white/70 text-white backdrop-blur-sm;
+    background: rgb(255 255 255 / 0.06);
+  }
+  .btn-light::before {
+    background: #fff;
+  }
+  .btn-light:hover {
+    @apply border-white text-night;
+  }
+
+  .btn-sm {
+    @apply min-h-[44px] px-5 text-[0.85rem];
+  }
+
+  /* Text link with an underline that draws in from the left */
+  .link-draw {
+    @apply relative inline-flex items-center gap-1.5 font-semibold text-hl;
+    background-image: linear-gradient(currentColor, currentColor);
+    background-size: 0% 1.5px;
+    background-position: 0 100%;
+    background-repeat: no-repeat;
+    transition: background-size 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .link-draw:hover {
+    background-size: 100% 1.5px;
+  }
+
+  /* Card lift used across credits, press and label cards */
+  .card-lift {
+    transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+      border-color 0.45s ease;
+  }
+  .card-lift:hover {
+    transform: translateY(-6px);
+    @apply border-magenta/40 shadow-soft;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
