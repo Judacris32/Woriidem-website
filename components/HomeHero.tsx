@@ -12,15 +12,27 @@ const ease = [0.22, 1, 0.36, 1] as const;
 const HOLD = 6500; // ms each photo stays on screen
 const FADE = 1.4; // s crossfade
 
-// Portrait photos from the Sony Music session. Desktop crops a wide band that
-// keeps both people and the logo wall; phones crop in on Woriidem (left).
-const img = (src: string) => ({ src, w: 1500, h: 2000 });
+// Sony Music session. Desktop uses the client's wide crops so the logo wall
+// and sign read clearly; phones use the tall originals, cropped in on Woriidem.
 const slides = [
-  { desktop: img("/images/sony-1.jpg"), mobile: img("/images/sony-1.jpg"), alt: "Woriidem standing in front of the Sony Music logo wall", pos: "object-[0%_50%] md:object-[50%_30%]" },
-  { desktop: img("/images/sony-2.jpg"), mobile: img("/images/sony-2.jpg"), alt: "Woriidem leaning against the Sony Music logo wall", pos: "object-[0%_50%] md:object-[50%_46%]" },
-  { desktop: img("/images/sony-3.jpg"), mobile: img("/images/sony-3.jpg"), alt: "Woriidem at Sony Music, looking to the side", pos: "object-[0%_50%] md:object-[50%_30%]" },
-  { desktop: img("/images/sony-4.jpg"), mobile: img("/images/sony-4.jpg"), alt: "Woriidem in a cap and Black 30 tee at Sony Music", pos: "object-[0%_50%] md:object-[50%_50%]" },
-  { desktop: img("/images/sony-5.jpg"), mobile: img("/images/sony-5.jpg"), alt: "Woriidem beside the Sony Music sign under the studio lights", pos: "object-[0%_50%] md:object-[50%_48%]" },
+  {
+    desktop: { src: "/images/sony-wide-1.jpg", w: 1500, h: 1083 },
+    mobile: { src: "/images/sony-1.jpg", w: 1500, h: 2000 },
+    alt: "Woriidem and an artist smiling in front of the Sony Music sign",
+    pos: "object-[0%_50%] md:object-[50%_8%]",
+  },
+  {
+    desktop: { src: "/images/sony-wide-2.jpg", w: 1500, h: 855 },
+    mobile: { src: "/images/sony-2.jpg", w: 1500, h: 2000 },
+    alt: "Woriidem leaning against the Sony Music logo wall",
+    pos: "object-[0%_50%] md:object-[50%_50%]",
+  },
+  {
+    desktop: { src: "/images/sony-wide-3.jpg", w: 1500, h: 840 },
+    mobile: { src: "/images/sony-3.jpg", w: 1500, h: 2000 },
+    alt: "Woriidem at Sony Music, looking to the side",
+    pos: "object-[0%_50%] md:object-[50%_50%]",
+  },
 ];
 
 export function HomeHero() {
@@ -38,7 +50,7 @@ export function HomeHero() {
   return (
     <section
       aria-label="Introduction"
-      className="relative isolate flex min-h-[100svh] items-end overflow-hidden bg-night text-white"
+      className="relative isolate flex min-h-[100svh] items-end overflow-hidden bg-night text-white md:items-start"
     >
       {/* Photo layers */}
       <div className="absolute inset-0 -z-20">
@@ -67,10 +79,14 @@ export function HomeHero() {
       </div>
 
       {/* Light at the top so his face reads, heavier at the bottom behind the text */}
-      <div aria-hidden className="absolute inset-0 -z-10 bg-[linear-gradient(to_bottom,rgb(11_11_15/0.6)_0%,rgb(11_11_15/0.15)_28%,rgb(11_11_15/0.35)_52%,rgb(11_11_15/0.92)_82%,rgb(11_11_15/0.97)_100%)]" />
-      <div aria-hidden className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_50%_35%,transparent_35%,rgb(11_11_15/0.55)_100%)]" />
+      {/* Phones: text sits low, so darken the bottom */}
+      <div aria-hidden className="absolute inset-0 -z-10 bg-[linear-gradient(to_bottom,rgb(11_11_15/0.6)_0%,rgb(11_11_15/0.15)_28%,rgb(11_11_15/0.35)_52%,rgb(11_11_15/0.92)_82%,rgb(11_11_15/0.97)_100%)] md:hidden" />
+      {/* Desktop: a soft dark pool behind the text only, so both people and the
+          Sony Music sign underneath stay clear */}
+      <div aria-hidden className="absolute inset-0 -z-10 hidden bg-[linear-gradient(to_bottom,rgb(11_11_15/0.55)_0%,rgb(11_11_15/0.12)_18%,rgb(11_11_15/0.12)_80%,rgb(11_11_15/0.6)_100%)] md:block" />
+      <div aria-hidden className="absolute inset-0 -z-10 hidden bg-[radial-gradient(ellipse_32%_34%_at_50%_34%,rgb(11_11_15/0.82)_0%,rgb(11_11_15/0.55)_55%,transparent_100%)] md:block" />
 
-      <div className="container relative flex flex-col items-center pb-14 pt-40 text-center md:pb-28">
+      <div className="container relative flex flex-col items-center pb-14 pt-40 text-center md:pb-0 md:pt-[clamp(6.5rem,15vh,10rem)]">
         <motion.p
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
@@ -95,7 +111,7 @@ export function HomeHero() {
             height={179}
             priority
             sizes="(min-width: 1024px) 640px, 80vw"
-            className="mx-auto h-auto w-[80%] max-w-[640px] drop-shadow-[0_8px_40px_rgb(0_0_0/0.5)]"
+            className="mx-auto h-auto w-[80%] max-w-[640px] drop-shadow-[0_8px_40px_rgb(0_0_0/0.5)] md:w-[40vw] md:max-w-[560px]"
           />
         </motion.h1>
 
@@ -110,15 +126,6 @@ export function HomeHero() {
           </span>
           <span className="hidden text-magenta sm:inline"> · </span>
           <span className="block sm:inline">Artist Developer</span>
-        </motion.p>
-
-        <motion.p
-          initial={{ opacity: 0, y: 18 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.72, ease }}
-          className="text-justified mt-5 max-w-[30rem] text-[1.05rem] leading-relaxed text-white/80 [hyphens:manual] [text-align-last:center] sm:text-lg"
-        >
-          I’ve written on records with more than nine million Spotify streams. I start with the artist, find the feeling, and build the song around it.
         </motion.p>
 
         <motion.div

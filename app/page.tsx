@@ -31,7 +31,7 @@ export default function HomePage() {
       <HomeHero />
 
       {/* Stats */}
-      <section aria-label="At a glance" className="relative z-10 -mt-14">
+      <section aria-label="At a glance" className="relative z-10 -mt-18">
         <div className="container">
           <Reveal className="grid grid-cols-2 overflow-hidden rounded-[26px] border border-line bg-bg shadow-soft lg:grid-cols-4">
             {stats.map((s, i) => (
