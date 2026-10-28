@@ -191,10 +191,12 @@ export const photos: Photo[] = [
   { src: "/images/stage-cash-throw.jpg", alt: "Woriidem performing as notes fly through the air above the stage", w: 720, h: 1080 },
   { src: "/images/portrait-beanie.jpg", alt: "Woriidem in a black beanie and vest, looking into the camera", w: 720, h: 1080 },
   { src: "/images/stage-smiling.jpg", alt: "Woriidem smiling on stage with the band behind him", w: 1080, h: 722 },
+  { src: "/images/sony-1.jpg", alt: "Woriidem and an artist smiling in front of the Sony Music sign", w: 1500, h: 2000 },
   { src: "/images/portrait-studio.jpg", alt: "Woriidem in a white sweatshirt and black cap, finger to his temple", w: 940, h: 1359 },
   { src: "/images/stage-arm-out.jpg", alt: "Woriidem with his arm outstretched mid-performance", w: 1080, h: 720 },
   { src: "/images/portrait-porch-smile.jpg", alt: "Woriidem laughing on a white porch", w: 720, h: 1080 },
   { src: "/images/stage-vest-chest.jpg", alt: "Woriidem singing with a hand on his chest", w: 720, h: 1080 },
   { src: "/images/portrait-sofa-wide.jpg", alt: "Woriidem on a sofa, phone in hand, in a quiet room", w: 720, h: 1080 },
+  { src: "/images/sony-3.jpg", alt: "Woriidem at Sony Music, looking to the side under warm studio lights", w: 1500, h: 2000 },
   { src: "/images/stage-walkout.jpg", alt: "Woriidem walking towards the band on a lit stage", w: 1080, h: 720 },
 ];

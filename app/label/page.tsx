@@ -54,10 +54,10 @@ export default function LabelPage() {
           </>
         }
         intro="I started this label to help new artists grow. I help them find their sound, make great records and build a real career in music."
-        desktop={{ src: "/images/crowd-moment.jpg", w: 1080, h: 720 }}
-        mobile={{ src: "/images/portrait-denim.jpg", w: 720, h: 1080 }}
-        alt="Woriidem with fans after a festival set"
-        imgClass="object-[50%_35%] md:object-[60%_30%]"
+        desktop={{ src: "/images/sony-2.jpg", w: 1500, h: 2000 }}
+        mobile={{ src: "/images/sony-2.jpg", w: 1500, h: 2000 }}
+        alt="Woriidem with an artist in front of the Sony Music logo wall"
+        imgClass="object-[0%_50%] md:object-[50%_42%]"
       />
 
       <section className="py-24 md:py-32">

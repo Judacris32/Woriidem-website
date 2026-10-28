@@ -24,10 +24,10 @@ export default function PressPage() {
           </>
         }
         intro="An award voted for by the listeners, and the coverage that followed. If you’re a journalist or promoter, everything you need is on this page."
-        desktop={{ src: "/images/stage-walkout.jpg", w: 1080, h: 720 }}
-        mobile={{ src: "/images/stage-vest-chest.jpg", w: 720, h: 1080 }}
-        alt="Woriidem walking towards the band on a lit stage"
-        imgClass="object-[50%_30%] md:object-[50%_40%]"
+        desktop={{ src: "/images/sony-4.jpg", w: 1500, h: 2000 }}
+        mobile={{ src: "/images/sony-4.jpg", w: 1500, h: 2000 }}
+        alt="Woriidem in a cap and Black 30 tee at Sony Music"
+        imgClass="object-[0%_50%] md:object-[50%_46%]"
       />
 
       {/* Award */}

@@ -12,33 +12,15 @@ const ease = [0.22, 1, 0.36, 1] as const;
 const HOLD = 6500; // ms each photo stays on screen
 const FADE = 1.4; // s crossfade
 
-// Each slide pairs a landscape photo (desktop) with a portrait one (phones).
-// Object positions keep his face in the top half, clear of the hero text.
+// Portrait photos from the Sony Music session. Desktop crops a wide band that
+// keeps both people and the logo wall; phones crop in on Woriidem (left).
+const img = (src: string) => ({ src, w: 1500, h: 2000 });
 const slides = [
-  {
-    desktop: { src: "/images/stage-mic-raised.jpg", w: 1080, h: 720 },
-    mobile: { src: "/images/stage-vest.jpg", w: 720, h: 1080 },
-    alt: "Woriidem on stage in a purple floral shirt, microphone raised to the crowd",
-    pos: "object-[55%_20%] md:object-[50%_22%]",
-  },
-  {
-    desktop: { src: "/images/stage-pointing.jpg", w: 1080, h: 720 },
-    mobile: { src: "/images/stage-cash-throw.jpg", w: 720, h: 1080 },
-    alt: "Woriidem pointing out to the crowd from a festival stage",
-    pos: "object-[55%_15%] md:object-[50%_30%]",
-  },
-  {
-    desktop: { src: "/images/stage-smiling.jpg", w: 1080, h: 722 },
-    mobile: { src: "/images/stage-vest-chest.jpg", w: 720, h: 1080 },
-    alt: "Woriidem smiling on stage with the band behind him",
-    pos: "object-[50%_18%] md:object-[45%_25%]",
-  },
-  {
-    desktop: { src: "/images/stage-arm-out.jpg", w: 1080, h: 720 },
-    mobile: { src: "/images/portrait-porch.jpg", w: 720, h: 1080 },
-    alt: "Woriidem with his arm outstretched mid-performance",
-    pos: "object-[50%_20%] md:object-[50%_22%]",
-  },
+  { desktop: img("/images/sony-1.jpg"), mobile: img("/images/sony-1.jpg"), alt: "Woriidem standing in front of the Sony Music logo wall", pos: "object-[0%_50%] md:object-[50%_30%]" },
+  { desktop: img("/images/sony-2.jpg"), mobile: img("/images/sony-2.jpg"), alt: "Woriidem leaning against the Sony Music logo wall", pos: "object-[0%_50%] md:object-[50%_46%]" },
+  { desktop: img("/images/sony-3.jpg"), mobile: img("/images/sony-3.jpg"), alt: "Woriidem at Sony Music, looking to the side", pos: "object-[0%_50%] md:object-[50%_30%]" },
+  { desktop: img("/images/sony-4.jpg"), mobile: img("/images/sony-4.jpg"), alt: "Woriidem in a cap and Black 30 tee at Sony Music", pos: "object-[0%_50%] md:object-[50%_50%]" },
+  { desktop: img("/images/sony-5.jpg"), mobile: img("/images/sony-5.jpg"), alt: "Woriidem beside the Sony Music sign under the studio lights", pos: "object-[0%_50%] md:object-[50%_48%]" },
 ];
 
 export function HomeHero() {
